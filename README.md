@@ -34,4 +34,4 @@ const Temp = (props) => {
   )
 }
 ```
-![image](http://github.com/FanWorldBegin/react-technique-1/raw/master/images/a.png)
+![image](https://github.com/FanWorldBegin/react-technique-1/blob/master/images/a.png)
