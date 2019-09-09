@@ -2,6 +2,7 @@
 import React, { Component, PureComponent } from 'react';
 import {Joke} from '../HOC/joker';
 import {User} from '../HOC/user'
+
 class HigherOrderComponentDemo extends Component {
 
   render() {

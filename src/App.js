@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Jumbotron from './components/Jumbotron';
 import Context from './pages/Context';
-import HigherOrderComponents from './pages/errorBoundary/error-boundary';
+import HigherOrderComponents from './pages/higher-order-components';
 import HigherOrderComponentDemo from './pages/higher-order-components-demo';
 import DefaultProps from './pages/defaultProps-Proptypes';
 import RenderProps from './pages/renderProps';
