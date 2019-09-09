@@ -1,0 +1,12 @@
+.navbar-brand {
+  color: #333;
+}
+
+a {
+  color: #aaa;
+  font-weight: 200;
+}
+.navbar-nav {
+  display: flex;
+  flex-wrap: wrap;
+}

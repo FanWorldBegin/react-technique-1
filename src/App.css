@@ -1,0 +1,13 @@
+h1 { margin: 0 auto; }
+img { display: block !important; }
+select  {
+  outline: 0;
+  overflow: hidden;
+  height: 30px;
+  color: #555;
+  border: 1px solid #ccc;
+  padding: 5px 3px 5px 10px;
+  border-radius: 10px;
+  width: 250px;
+  font-size: 1rem;
+}
