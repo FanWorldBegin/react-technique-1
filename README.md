@@ -466,3 +466,70 @@ const App = () => {
 
 export default App;
 ```
+
+## 11.React.Children API 和 props.children 讲解
+
+```javascript
+class Children extends Component {
+  render() {
+    return (
+      <div>
+        <div className="container">
+          <h2>React.Children API 和 props.children 讲解</h2>
+          {/* 把app中的子元素传递给app */}
+          <ChildrenEx>
+            {
+              `
+              <ChildrenEx>
+              我是子元素。。。。。
+              </ChildrenEx>
+              `
+            }
+          </ChildrenEx>
+          <CloneElement>
+            <li>CloneElement children1</li>
+            <li>CloneElement children2</li>
+            <li>CloneElement children3</li>
+          </CloneElement>
+        </div>
+      </div>
+    );
+  }
+}
+```
+
+### 1.this.props.children 的使用方法
+任何东西都可以作为children 只要是一个可渲染的对象。
+
+循环this.props.children，单个对象处理
+
+React.Children.map
+在 children 里的每个直接子节点上调用一个函数，并将 this 设置为 thisArg。如果 children 是一个数组，它将被遍历并为数组中的每个子节点调用该函数。如果子节点为 null 或是 undefined，则此方法将返回 null 或是 undefined，而不会返回数组。
+```javascript
+React.Children.map(children, function[(thisArg)])
+```
+```javascript
+class ChildrenEx extends Component {
+
+  render() {
+    return (
+      <div>
+        <div className="container">
+          <h2>把ChildrenEx中的子元素，传递给ChildrenEx</h2>
+          {this.props.children}
+
+          <h2>通过 React.Children 进行map循环</h2>
+          {
+            React.Children.map(this.props.children, (child, i) => {
+              //忽略第一个
+              if( i<1 ) return;
+              return child
+            })
+          }
+        </div>
+      </div>
+    );
+  }
+}
+
+```

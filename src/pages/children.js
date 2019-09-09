@@ -16,6 +16,9 @@ class Children extends Component {
               </ChildrenEx>
               `
             }
+            {
+              `第二个对象`
+            }
           </ChildrenEx>
           <CloneElement>
             <li>CloneElement children1</li>
