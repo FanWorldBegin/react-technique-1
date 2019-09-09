@@ -26,8 +26,8 @@ class DefaultProps extends Component {
 }
 
 export default DefaultProps
-//当父组件没有传入内容时候设置初始值,
-//无状态组件
+// 当父组件没有传入内容时候设置初始值,
+// 无状态组件
 // Hello.defaultProps = {
 //   name: '我是初始值'
 // }
@@ -85,7 +85,4 @@ Money.propTypes = {
   }),
 
   ),
-
-
-
 }

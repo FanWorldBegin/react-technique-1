@@ -206,3 +206,165 @@ export const User = WithFetch('https://randomuser.me/api/')(props => {
   )
 })
 ```
+
+## 7.react-powerplug
+React 库 - 功能强大的可插入组件简化代码
+重构前
+```javascript
+import React, { Component } from 'react';
+import './App.css';
+
+class Counter extends Component {
+  state = {
+    counter: 0
+  }
+
+  increment = () => {
+    this.setState(prevState => ({ counter: prevState.counter + 1 }));
+  }
+
+  decrement = () => {
+    this.setState(prevState => ({ counter: prevState.counter - 1 }));
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <div>Counter: { this.state.counter }</div>
+        <button onClick={ this.increment }>Increment</button>
+        <button onClick={ this.decrement }>Decrement</button>
+      </div>
+    );
+  }
+}
+
+export default Counter;
+```
+
+重构后
+```javascript
+import React, { Component } from 'react';
+import './App.css';
+import { State } from 'react-powerplug'
+
+class Counter extends Component {
+  render() {
+    return (
+      <State initial={{ counter: 0 }}>
+        {({ state, setState }) => (
+          <div className="App">
+            <div>Counter: { state.counter }</div>
+            <button onClick={ () => setState({ counter: state.counter + 1 }) }>Increment</button>
+            <button onClick={ () => setState({ counter: state.counter - 1 }) }>Decrement</button>
+          </div>
+        )}
+      </State>
+    );
+  }
+}
+
+export default Counter;
+
+```
+
+## 8.返回多个组件
+使用高阶组件
+```javascript
+import React, { Component } from 'react';
+import './App.css';
+
+// const Wrapper = ({ children }) => children; 这个相关于 const Wrapper = ( props ) => props.children;
+const Wrapper = ({ children }) => children;
+
+const Hello = ({ name }) => {
+  return (
+    <Wrapper>
+      <h1>React 16 rocks</h1>
+      <p>Hello, { name }!</p>
+    </Wrapper>
+  )
+}
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Hello name="Hackages" />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+## 9.defaultProps 和 类型检查 PropTypes part 1
+### 1. 类组件设置defaultProps
+```javascript
+class Hello extends Component {
+  static defaultProps = {
+    name: '初始props',
+  }
+  render() {
+    return (
+      <h2>Hello, {this.props.name}</h2>
+    )
+  }
+}
+```
+
+### 2.无状态组件
+当父组件没有传入内容时候设置初始值,
+```javascript
+Hello.defaultProps = {
+  name: '我是初始值'
+}
+const Hello = (props) => {
+  return (
+    <h3>Hello, {props.name}</h3>
+  )
+}
+```
+
+### 3. 类型检查 PropTypes 
+```javascript
+import PropTypes from 'prop-types';
+// PropTypes 类型校验,限制传入为数字
+class Money extends Component {
+
+  render() {
+    return (
+      <div>
+        <h2>Hello, {this.props.money.toFixed(2)} {this.props.name}</h2>
+        <ul>
+          {
+            this.props.movies.map(movie => (
+              <li key={movie.id}>{movie.title}</li>
+            ))
+          }
+        </ul>
+      </div>
+    )
+  }
+}
+Money.propTypes = {
+  money: PropTypes.number,
+  onChange: PropTypes.func.isRequired,
+  // An object that could be one of many types
+  //可以是数组中任何一个类型
+  name: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+
+  //arrayOf 是数组
+  //数组中元素是对象，对对象进行具体规范
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    visit_count: PropTypes.number
+  }),
+
+  ),
+}
+```
