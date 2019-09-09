@@ -33,5 +33,23 @@ const Temp = (props) => {
     </Fragment>
   )
 }
+
 ```
+
+### 2.发现父组件向无状态组件传入参数的时候，就算每次参数不变也会重复渲染
 ![image](https://github.com/FanWorldBegin/react-technique-1/blob/master/images/a.png)
+
+判断值没变化则不刷新
+![image](https://github.com/FanWorldBegin/react-technique-1/blob/master/images/b.png)
+
+使用组件PureComponent
+去掉shouldComponenetUpdate 不判断但当val不变时候也不会重复渲染
+```javascript
+class Temp extends PureComponent {
+  render() {
+    return (
+      <div>{this.props.val}</div>
+    )
+  }
+}
+```
