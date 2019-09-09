@@ -1,22 +1,7 @@
-#react 技巧总结
+# react 技巧总结
 
-## react-router
+## 1. react-router
 
-### 1. 无状态组件
-```javascript
-//Fragment 把并列的元素包裹起来不会引入多余元素
-const Temp = (props) => {
-  return (
-    <Fragment>
-      <li>ssss</li>
-      <li>aaaa</li>
-    </Fragment>
-  )
-}
-```
-### 
-
-### 2. 引入Router
 ```javascript
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -35,3 +20,18 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
     );
   }
 ```
+## 2. React.PureComponent 无状态组件
+### 1. 无状态组件
+无状态组件不需要管理state, 只负责展示，没有refs属性。
+```javascript
+//Fragment 把并列的元素包裹起来不会引入多余元素
+const Temp = (props) => {
+  return (
+    <Fragment>
+      <li>ssss</li>
+      <li>aaaa</li>
+    </Fragment>
+  )
+}
+```
+![image](http://github.com/FanWorldBegin/react-technique-1/raw/master/images/a.png)
