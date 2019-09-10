@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 //使用let 因为会修改
 //Field 
 let ContactForm = props => {
+  console.log(props)
   const { handleSubmit } = props
   return (
     <form onSubmit={handleSubmit}>

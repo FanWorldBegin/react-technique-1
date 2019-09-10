@@ -628,7 +628,7 @@ export default StyledComponents
 
 ```
 
-## redux-form
+## 13.redux-form
 
 使用react-redux的高阶组件，用于HTML 表单存储状态
 [react-redux](https://github.com/erikras/redux-form)
@@ -744,3 +744,49 @@ export default ContactForm
 ```
 查看redux 数据结构
 ![image](https://github.com/FanWorldBegin/react-technique-1/blob/master/images/e.png)
+
+
+## 14. React Portals
+第一个参数是一个可渲染的React子元素，第二个参数是个DOM元素。
+
+提供了可以将自元素渲染在继承的Dom节点外的节点
+```javascript
+ReactDOM.createPortal(child, container)
+```
+### 1.在index.html中添加节点
+
+```html
+    <div id="root"></div>
+    <div id="anotherRoot"></div>
+```
+挂载的地方是在createPortal 中传入的，不是当前存在的地方，可以在模态框中使用的到
+
+### portal.js
+```javascript
+import React, { Component, PureComponent } from 'react';
+import { createPortal } from 'react-dom';
+
+const mainContainer = document.getElementById('root');
+const portalContainer = document.getElementById('anotherRoot');
+
+class HelloFromPortal extends React.Component {
+  render() {
+    return (
+      <h1>I am rendered through a Portal.</h1>
+    );
+  }
+}
+
+class  Portals extends Component {
+  render() {
+    return (
+      <div>
+        <h1>Hello World</h1>
+        {createPortal(<HelloFromPortal />, portalContainer)}
+      </div>
+    );
+  }
+}
+
+export default Portals
+```
