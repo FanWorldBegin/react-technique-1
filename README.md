@@ -626,5 +626,121 @@ class StyledComponents extends Component {
 
 export default StyledComponents
 
+```
+
+## redux-form
+
+使用react-redux的高阶组件，用于HTML 表单存储状态
+[react-redux](https://github.com/erikras/redux-form)
+不使用state,使用redux 来统一管理form
+1. 提供 formReducer 相当于reducer
+2. reduxForm() 相当于 connect 方法，起链接作用
+3.  Field 包裹input框的
+### index.js
+```javascript
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import App from './app';
+import { createStore } from 'redux';
+import rootReducer from './reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+import { Provider } from 'react-redux';
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools()
+)
+
+
+export default class ReduxFrom extends Component {
+  render() {
+    return (
+      <Provider store={ store }>
+        <h1>ReduxFrom</h1>
+        <App />
+      </Provider>
+    )
+  }
+}
+```
+
+### app.js
+```javascript
+
+import React, { Component } from 'react';
+import ContactPage from './ContactPage';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <ContactPage />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+### contactPage.js
+
+```javascript
+import React from 'react'
+import ContactForm from './ContactForm'
+
+class ContactPage extends React.Component {
+  submit = values => {
+    // print the form values to the console
+    console.log(values)
+  }
+  render() {
+    return <ContactForm onSubmit={this.submit} />
+  }
+}
+
+export default ContactPage;
 
 ```
+
+### ContactForm.js
+创建表单组件
+```javascript
+
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
+
+//使用let 因为会修改
+//Field 
+let ContactForm = props => {
+  const { handleSubmit } = props
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="firstName">First Name</label>
+        <Field name="firstName" component="input" type="text" />
+      </div>
+      <div>
+        <label htmlFor="lastName">Last Name</label>
+        <Field name="lastName" component="input" type="text" />
+      </div>
+      <div>
+        <label htmlFor="email">Email</label>
+        <Field name="email" component="input" type="email" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  )
+}
+
+//connect 方法
+ContactForm = reduxForm({
+  // a unique name for the form
+  form: 'contact', //唯一的名字
+})(ContactForm)
+
+export default ContactForm
+```
+查看redux 数据结构
+![image](https://github.com/FanWorldBegin/react-technique-1/blob/master/images/e.png)

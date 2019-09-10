@@ -41,6 +41,7 @@ class App extends Component {
           <Route path='/styledComponents' component={StyledComponents}/>
           <Route path='/portals' component={Portals}/>
           <Route path='/portalsModal' component={PortalsModal}/>
+          <Route path='/reduxFrom' component={ReduxFrom} />
         </div>
         <Footer />
       </Router>
