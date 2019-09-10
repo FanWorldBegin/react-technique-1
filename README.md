@@ -501,7 +501,7 @@ class Children extends Component {
 ### 1.this.props.children 的使用方法
 任何东西都可以作为children 只要是一个可渲染的对象。
 
-循环this.props.children，单个对象处理
+循环this.props.children,可选返回
 
 React.Children.map
 在 children 里的每个直接子节点上调用一个函数，并将 this 设置为 thisArg。如果 children 是一个数组，它将被遍历并为数组中的每个子节点调用该函数。如果子节点为 null 或是 undefined，则此方法将返回 null 或是 undefined，而不会返回数组。
@@ -533,3 +533,35 @@ class ChildrenEx extends Component {
 }
 
 ```
+
+### 2.给子元素传递参数
+当子元素是组件时候，通过props可以给每个组件传入事件.
+
+```javascript
+class CloneElement extends Component {
+
+  render() {
+    return (
+      <div>
+        <div className="container">
+          <h2>使用 CLoneElement </h2>
+          <ul>
+            {
+              React.Children.map(this.props.children, (child, i) => {
+                return React.cloneElement(child, {
+                  name: 'CLoneElement'
+                })
+              })
+            }
+          </ul>
+        </div>
+      </div>
+    );
+  }
+}
+```
+
+## 12. styled-components
+安装，生成一个包含样式的组件d
+yarn add  styled-components
+![image](https://github.com/FanWorldBegin/react-technique-1/blob/master/images/d.png)
