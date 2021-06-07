@@ -5,7 +5,7 @@ class Joke extends Component {
     super();
     this.state = {
       loading: true,
-      jokes: null
+      jokes: null,
     };
   }
 
